@@ -43,7 +43,7 @@ function App() {
   const createNoteHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Check if title already exists
+    // Check if title already exists (for different note IDs)
     if (notes.some((note) => note.title === createNote.title && note.id !== createNote.id)) {
       setPopupMessage('Note title already exists, please choose a different title.'); // Show error for duplicate title
       return;
@@ -56,14 +56,23 @@ function App() {
 
     // Handle editing existing note
     if (createNote.id !== -1) {
-      setNotes((prevNotes) =>
-        prevNotes.map((note) =>
-          note.id === createNote.id ? { ...createNote } : note
+      const updatedNotes = notes.map((note) =>
+        note.id === createNote.id ? { ...createNote } : note
+      );
+      setNotes(updatedNotes);
+      
+      // Update favorites if title changes
+      setFavorites((prevFavorites) =>
+        prevFavorites.map((favorite) => 
+          favorite === notes.find((note) => note.id === createNote.id)?.title ? createNote.title : favorite
         )
       );
     } else {
       // Handle creating a new note with a unique ID
       setNotes([{ ...createNote, id: generateUniqueId() }, ...notes]);
+      if (favorites.includes(createNote.title)) {
+        setFavorites((prevFavorites) => [...prevFavorites, createNote.title]); // Add new title to favorites if it's new
+      }
     }
 
     setCreateNote(initialNote); // Clear the form
@@ -211,7 +220,7 @@ function App() {
               <p className="note-content">{note.content}</p>
               <p>{note.label}</p>
             </div>
-          ))}
+          ))} 
         </div>
 
         {/* Display list of favorited notes */}
