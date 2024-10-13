@@ -1,0 +1,188 @@
+/* Global Styles */
+body {
+  margin: 20px;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+/* Light Theme Styles */
+body[data-theme='light'] {
+  background-color: #eeeeee;
+  color: #000000; /* Default text color for light theme */
+}
+
+.app-container {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .app-container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+  }
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: minmax(250px, auto);
+  gap: 20px;
+}
+
+.note-item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Default background for light theme */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left */
+}
+
+.notes-header button {
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  max-width: fit-content;
+  margin-right: 10px; /* Space between buttons */
+}
+
+h2 {
+  margin: 0;
+}
+
+.note-item h2 {
+  word-wrap: break-word; /* Break long words if necessary */
+  white-space: normal; /* Allow the text to wrap to the next line */
+  overflow-wrap: break-word; /* Handle long unbroken strings */
+  max-width: 100%; /* Make sure the title does not exceed the note box width */
+}
+
+.note-item p {
+  word-wrap: break-word; /* Break long words if necessary */
+  white-space: normal; /* Allow the text to wrap to the next line */
+  overflow-wrap: break-word; /* Handle long unbroken strings */
+  max-width: 100%; /* Ensure the content does not exceed the note box width */
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+textarea,
+input {
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.note-form button {
+  border-radius: 5px;
+  background-color: rgb(64, 154, 184);
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+}
+
+.note-form button:hover {
+  background-color: rgb(106, 175, 198);
+  cursor: pointer;
+}
+
+/* Dark Theme Styles */
+body[data-theme='dark'] {
+  background-color: #222222;
+  color: black; /* Text color for dark theme */
+}
+
+.note-item[data-theme='dark'] {
+  background-color: #252424; /* Light grey background for note items in dark theme */
+  color: black; /* Neon orange text color for dark theme */
+}
+
+/* Additional Styles for Note Items in Dark Theme */
+.note-item[data-theme='dark'] h2,
+.note-item[data-theme='dark'] p {
+  color: #ff4500; /* Neon orange for text in dark theme */
+}
+
+/* Favorite Button Styles */
+.favorite-button {
+  color: white; /* Default heart color */
+}
+
+.favorite-button::before {
+  content: '♥'; /* Unicode heart character */
+  color: transparent; /* Make the default heart transparent */
+  position: absolute; /* Positioning for the outline */
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
+  z-index: 0; /* Behind the actual heart */
+}
+
+.favorite-button.favorited {
+  color: red; /* Change color to red when favorited */
+}
+
+.favorite-button.favorited::before {
+  color: black; /* Black outline when favorited */
+  text-shadow: 0 0 0 black; /* Use text-shadow to create outline effect */
+}
+
+.error-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top of other content */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.error-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it's on top */
+}
+
+.error-popup-content {
+  background-color: white; /* Popup content background */
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.error-popup-content button {
+  margin-top: 10px;
+}
+
+
